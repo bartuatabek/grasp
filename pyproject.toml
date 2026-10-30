@@ -1,0 +1,53 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "cvep-decoder"
+version = "4.0.0"
+description = "A generic representation-adaptive sequential decoder for eight-channel c-VEP BCIs"
+readme = "README.md"
+requires-python = ">=3.11,<3.14"
+license = { text = "BSD-3-Clause" }
+authors = [{ name = "c-VEP Decoder contributors" }]
+dependencies = [
+  "ipyevents>=2.0.4",
+  "ipywidgets>=8.1.9",
+  "marimo>=0.24.2",
+  "numpy>=2.0,<3",
+  "pandas-stubs~=3.0.5",
+  "pyntbci==1.9.0",
+  "pyriemann>=0.7,<1",
+  "scikit-learn>=1.5,<2",
+  "scipy>=1.13,<2",
+]
+
+[project.optional-dependencies]
+benchmark = [
+  "moabb==1.5.0",
+  "mne>=1.8,<2",
+  "pandas>=2.2,<4",
+  "matplotlib>=3.9,<4",
+  "nbformat>=5.10,<6",
+  "nbconvert>=7.16,<8",
+  "ipykernel>=6.29,<8",
+]
+dev = [
+  "pytest>=8.3,<10",
+  "pytest-cov>=6,<8",
+  "ruff>=0.9,<1",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/cvep_decoder"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
